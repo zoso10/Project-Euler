@@ -3,22 +3,30 @@
 # Date: 6/27/2012
 # This was done during a meeting
 
-def fact(n)
-	return (1..n).inject { |prod, i| prod * i }
+
+def factorial(n)
+	(1..n).inject { |prod, i| prod * i }
 end
 
 
-def curious(n)
+def isCurious(n)
 	sum = 0
-	n.to_s.each_byte { |b| }
-	#n.to_s.inject { |sum, i| sum += }
+	n.to_s.split(//).each { |b| sum += (1..b.to_i).inject(1) { |prod, i| prod * i } }
+	
+	if (sum == n)
+		return n
+	else
+		return 0
+	end
+end
 
 
+totalSum = 0
+for i in 3..7*factorial(9)
+	totalSum += isCurious(i)
+end
 
-
-
-#puts fact(ARGV.first.to_i)
-
+puts totalSum
 
 
 
