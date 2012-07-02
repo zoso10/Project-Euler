@@ -26,9 +26,11 @@ def getScore(name, index)
 end
 
 
-
+t1 = Time.now
 a = File.open("names.txt", "rb").read.gsub(/["]/,'').split(',').sort!
 a.each_index{ |i| getScore(a.at(i), i) }
+t2 = Time.now
 
 puts $totalSum
+print (t2-t1)*1000.0, "ms\n"
 
