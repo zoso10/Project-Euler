@@ -20,3 +20,23 @@ def sumFactors(a)
 	return @sum
 end
 
+
+
+$totalSum = 0
+(2..999).each do |i|
+
+	@fac1 = Array.new
+	@fac1 = factor(i)
+	@facSum1 = sumFactors(@fac1)
+
+	@fac2 = Array.new
+	@fac2 = factor(@fac1)
+	@facSum2 = sumFactors(@fac2)
+
+	if @facSum1 == fac2 and @facSum2 == fac1 and fac1 != fac2
+		@totalSum += fac1 + fac2
+	end
+end
+
+puts totalSum
+
