@@ -21,22 +21,22 @@ def sumFactors(a)
 end
 
 
-
 $totalSum = 0
-(2..999).each do |i|
 
-	@fac1 = Array.new
-	@fac1 = factor(i)
-	@facSum1 = sumFactors(@fac1)
+t1 = Time.now
+(1..9999).each do |i|
+	
+	a = i
+	da = sumFactors(factor(a))
 
-	@fac2 = Array.new
-	@fac2 = factor(@fac1)
-	@facSum2 = sumFactors(@fac2)
+	b = da
+	db = sumFactors(factor(b))
 
-	if @facSum1 == fac2 and @facSum2 == fac1 and fac1 != fac2
-		@totalSum += fac1 + fac2
+	if db == a and a != b
+		$totalSum += a
 	end
 end
+t2 = Time.now
 
-puts totalSum
-
+puts $totalSum
+print (t2-t1) * 1000, " MS \n"
