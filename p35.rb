@@ -1,34 +1,37 @@
-# What I had before was piss
-# This is also piss
+# Problem #35 for Project Euler
+# Author: Tyler Ewing
+# Date: 7/16/2012
 
-require 'Prime'
+$NUMS = 0
+
+# Sieve
+$ar = Array.new(1000000)
+$ar.fill(true)
+
+(2..Math.sqrt(1000000)).each do |i|
+	if $ar[i]
+		(0..(1000000/i - i)).each do |p|
+			$ar[i * (i+p)] = false
+		end
+	end
+end
+$ar[0] = false
+$ar[1] = false
 
 
-$nums = 0
-
-def isPrime(n)
-	sq = Math.sqrt(n)
-	(2..sq).each do |i|
-		if n % i == 0
+def isCircular(n)
+	n.to_s.split(//).permutation.to_a.each do |p|
+		if !$ar[p.join.to_i]
 			return false
 		end
 	end
-
-	return n > 1
+	return true
 end
 
 
-Prime.each(1000) do |p1|
-	allPrime = true
+primes = Array.new
+$ar.each_index { |i| if $ar[i] then primes.push (i) end }
+primes.each { |p| if isCircular(p) then $NUMS += 1 end }
 
-	p1.to_s.split(//).permutation.to_a.each do |p2|
-		if !isPrime(p2.join.to_i)
-			allPrime = false
-		end
-	end
-	if(allPrime)
-		$nums += 1
-	end
-end
 
-puts $nums
+puts $NUMS
