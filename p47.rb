@@ -9,21 +9,22 @@ def isPrime(n)
 			return false
 		end
 	end
-	return true
+	return n > 1
 end
 
 
 def factor(n)
 	@a = Array.new
-	@a.push(1)
 	(2..Math.sqrt(n)).each do |i|
 		if n % i == 0
 			@a.push(i)
 			@a.push(n/i)
 		end
 	end
-	return @a
+	return @a.uniq
 end
+
+
 
 
 
