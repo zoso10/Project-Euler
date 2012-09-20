@@ -20,8 +20,9 @@ $ar[1] = false
 
 
 def isCircular(n)
-	n.to_s.split(//).permutation.to_a.each do |p|
-		if !$ar[p.join.to_i]
+	n.to_s.length.times do |i|
+		n = Array.new(n.to_s.length){ |x| n[x-1] }
+		if !$ar[n.join.to_i]
 			return false
 		end
 	end
@@ -30,8 +31,13 @@ end
 
 
 primes = Array.new
-$ar.each_index { |i| if $ar[i] then primes.push (i) end }
-primes.each { |p| if isCircular(p) then $NUMS += 1 end }
+$ar.each_index { |i| if $ar[i] then primes.push(i) end }
+primes.each do |p|
+	if isCircular p 
+		$NUMS += 1
+		puts p
+	end
+end
 
 
 puts $NUMS

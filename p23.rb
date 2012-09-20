@@ -2,6 +2,7 @@
 # Author: Tyler Ewing
 # Date: 7/15/2012
 
+=begin
 def factor(n)
 	a = Array.new
 	a.push(1)
@@ -25,7 +26,7 @@ class Enumerator
 		end
 	end
 end
-=end
+
 
 
 abundant = Enumerator.new do |y|
@@ -62,3 +63,29 @@ a.combination(2).each do |a|
 	b.push(a.reduce(:+))
 end
 puts b.uniq.reduce(:+)
+=end
+
+class Integer
+	def factors
+		a = Array.new
+		a.push(1)
+		(2..Math.sqrt(self)).each do |i|
+			if self % i == 0
+				a.push(i)
+				a.push(self/i)
+			end
+		end
+		return a
+	end
+
+	def abundant?
+		return self.factors.reduce(:+) > self
+	end
+end
+
+ar = Array.new
+#(12..28123).each{ |i| if i.abundant? then ar.push(i) end } # wayyyyy too slow
+
+
+# We know all odd numbers up to 945 cannot be the sum of abundant numbers
+# How?
