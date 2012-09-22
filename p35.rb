@@ -1,8 +1,6 @@
 # Problem #35 for Project Euler
 # Author: Tyler Ewing
-# Date: 7/16/2012
-
-$NUMS = 0
+# Date: 9/20/2012
 
 # Sieve
 $ar = Array.new(1000000)
@@ -18,26 +16,32 @@ end
 $ar[0] = false
 $ar[1] = false
 
+# Check if a number is a circular prime
+class Integer
+	def circularPrime?
+		n = self.to_s
+		n.length.times do |i|
+			n = Array.new(n.length){ |x| n[x-1] }
+			if !$ar[n.join.to_i]
+				return false
+			end
+		end
+		return true
+	end
+end
 
-def isCircular(n)
-	n.to_s.length.times do |i|
-		n = Array.new(n.to_s.length){ |x| n[x-1] }
-		if !$ar[n.join.to_i]
-			return false
+# This is slower since I check every prime
+# It would be better if I calculated the numbers it could be...
+$NUMS = 0
+t1 = Time.now
+(2..999999).each do |i|
+	if $ar[i]
+		if i.circularPrime?
+			$NUMS += 1
 		end
 	end
-	return true
 end
-
-
-primes = Array.new
-$ar.each_index { |i| if $ar[i] then primes.push(i) end }
-primes.each do |p|
-	if isCircular p 
-		$NUMS += 1
-		puts p
-	end
-end
-
+t2 = Time.now
 
 puts $NUMS
+print (t2-t1) * 1000.0, " ms\n"
