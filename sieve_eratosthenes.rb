@@ -22,6 +22,6 @@ ar[1] = false
 # End the timer
 t2 = Time.now
 
-ar.each_index { |i| if ar[i] then print i, " " end }
+ar.each_index { |i| print i, " " if ar[i] }
 print "\n"
 puts (t2-t1)*1000.0
